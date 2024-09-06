@@ -1,0 +1,1 @@
+# ruta para añadir user es localhost/user/register
