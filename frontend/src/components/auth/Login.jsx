@@ -1,3 +1,5 @@
+import { FacebookIcon, GithubIcon, GoogleIcon } from "../../icons/Icons";
+import LoginSocialIcon from "../LoginSocialIcon";
 
 export function Login() {
   return (
@@ -80,24 +82,9 @@ export function Login() {
             <p className=" text-gray-500">or</p>
             <hr className="w-full bg-gray-500 h-[2px]" />
           </div>
-          <div className="border rounded-full p-4 flex justify-center gap-4">
-            <img src="/src/assets/social-media/google.png" alt="" />
-            <p>
-              Login with <span className="font-semibold">Google</span>
-            </p>
-          </div>
-          <div className="border rounded-full p-4 flex justify-center gap-4">
-            <img src="/src/assets/social-media/github.png" alt="" />
-            <p>
-              Login with <span className="font-semibold">GitHub</span>
-            </p>
-          </div>
-          <div className="border rounded-full p-4 flex justify-center gap-4">
-            <img src="/src/assets/social-media/facebook.png" alt="" />
-            <p>
-              Login with <span className="font-semibold">Facebook</span>
-            </p>
-          </div>
+          <LoginSocialIcon icon={<GoogleIcon />} text={"Google"} />
+          <LoginSocialIcon icon={<GithubIcon />} text={"Github"} />
+          <LoginSocialIcon icon={<FacebookIcon />} text={"Facebook"} />
         </div>
       </div>
       <div className="hidden bg-primary rounded-3xl md:flex items-center justify-center h-full">
