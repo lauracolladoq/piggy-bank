@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userRegistrationSchema } from "../../schemas/userSchema";
 import { useNavigate } from "react-router-dom";
+import { FacebookIcon, GithubIcon, GoogleIcon } from "../../icons/Icons";
+import RegisterSocialIcons from "./RegisterSocialIcons";
 
 export function Register() {
   const {
@@ -221,24 +223,9 @@ export function Register() {
           </div>
           {/* Socialite Login */}
           <div className="flex gap-4 justify-center">
-            <div className="border rounded-full p-4 ">
-              <img
-                src="/src/assets/social-media/google.png"
-                alt="Google Icon"
-              />
-            </div>
-            <div className="border rounded-full p-4 ">
-              <img
-                src="/src/assets/social-media/github.png"
-                alt="GitHub Icon"
-              />
-            </div>
-            <div className="border rounded-full p-4">
-              <img
-                src="/src/assets/social-media/facebook.png"
-                alt="Facebook Icon"
-              />
-            </div>
+            <RegisterSocialIcons icon={GoogleIcon} href={"/"} />
+            <RegisterSocialIcons icon={GithubIcon} href={"/"} />
+            <RegisterSocialIcons icon={FacebookIcon} href={"/"} />
           </div>
         </div>
       </div>
