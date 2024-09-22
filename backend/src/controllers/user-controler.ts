@@ -53,16 +53,23 @@ class UserController {
 
   static async register(req: Request, res: Response) {
     const data = req.body;
+    let error = [];
 
     try {
       const validatedUser = userRegisterSchema.parse(data);
-      const userExist = await User.getByUsernameOrEmail(
-        data.username,
-        data.email
-      );
+      const usernameExist = await User.getByUsername(validatedUser.username);
+      const emailExist = await User.getByEmail(validatedUser.email);
 
-      if (userExist) {
-        return res.status(409).json({ message: 'User already exists' });
+      if (usernameExist) {
+        error.push('Username already exists');
+      }
+
+      if (emailExist) {
+        error.push('Email already exists');
+      }
+
+      if (error.length > 0) {
+        return res.status(409).json({ error });
       }
 
       const saltRounds = 10;
@@ -75,9 +82,13 @@ class UserController {
 
       const user = await User.create(validatedUser);
 
-      const token = jwt.sign({ id: user.id }, JWT_SECRET_KEY, {
-        expiresIn: '1h',
-      });
+      const token = jwt.sign(
+        { id: user.id, email: user.email, role: user.role },
+        JWT_SECRET_KEY,
+        {
+          expiresIn: '1h',
+        }
+      );
 
       return res
         .status(201)
@@ -103,14 +114,9 @@ class UserController {
   static async login(req: Request, res: Response) {
     const data = req.body;
     const password = req.body.password;
-
     try {
       const validatedUser = userLoginSchema.parse(data);
-      const userExist = await User.getByUsernameOrEmail(
-        null,
-        validatedUser.email
-      );
-
+      const userExist = await User.getByEmail(validatedUser.email);
       const passwordCorrect =
         userExist === null
           ? false
@@ -121,11 +127,13 @@ class UserController {
           .status(401)
           .json({ error: true, message: 'invalid user or password' });
       }
-
-      const token = jwt.sign({ id: userExist.id }, JWT_SECRET_KEY, {
-        expiresIn: '1h',
-      });
-
+      const token = jwt.sign(
+        { id: userExist.id, email: userExist.email, role: userExist.role },
+        JWT_SECRET_KEY,
+        {
+          expiresIn: '1h',
+        }
+      );
       return res
         .status(200)
         .cookie('token', token, {
@@ -137,12 +145,10 @@ class UserController {
         .json({ message: 'User logged in' });
     } catch (error) {
       console.error(error);
-
       if (error instanceof z.ZodError) {
         const errorMessages = error.errors.map((err) => err.message);
         return res.status(400).json({ error: errorMessages });
       }
-
       return res.status(500).json({ message: 'Error on login' });
     }
   }
