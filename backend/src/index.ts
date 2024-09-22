@@ -1,10 +1,10 @@
 import express, { Express, NextFunction, Request, Response } from 'express';
 import { PORT } from './config/config';
 import { corsMiddleware } from './middlewares/cors';
-import userRouter from './routes/users';
 import cookieParser from 'cookie-parser';
 import authMiddleware from './middlewares/auth';
 import { CustomRequest } from './types/types';
+import userRouter from './routes/user-routes';
 
 const app: Express = express();
 
