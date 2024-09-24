@@ -75,7 +75,7 @@ export function Register() {
                 {...register("email")}
                 type="text"
                 placeholder="Email"
-                className="bg-gray-100 w-full"
+                className="bg-gray-100 w-full focus:outline-none"
               />
             </div>
             {errors.email && (
@@ -103,7 +103,7 @@ export function Register() {
                 {...register("username")}
                 type="text"
                 placeholder="Username"
-                className="bg-gray-100 w-full"
+                className="bg-gray-100 w-full focus:outline-none"
               />
             </div>
             {errors.username && (
@@ -131,7 +131,7 @@ export function Register() {
                 {...register("password")}
                 type="password"
                 placeholder="Password"
-                className="bg-gray-100 w-full"
+                className="bg-gray-100 w-full focus:outline-none"
               />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -178,7 +178,7 @@ export function Register() {
                 {...register("confirmPassword")}
                 type="password"
                 placeholder="Confirm password"
-                className="bg-gray-100 w-full"
+                className="bg-gray-100 w-full focus:outline-none"
               />
               <svg
                 xmlns="http://www.w3.org/2000/svg"

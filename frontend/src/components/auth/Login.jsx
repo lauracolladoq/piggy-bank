@@ -30,7 +30,7 @@ export function Login() {
             <input
               type="email"
               placeholder="Email"
-              className="bg-gray-100 w-full"
+              className="bg-gray-100 w-full focus:outline-none"
             />
           </div>
           <div className="flex gap-3 p-4 bg-gray-100 rounded-full items-center">
@@ -52,7 +52,7 @@ export function Login() {
             <input
               type="password"
               placeholder="Password"
-              className="bg-gray-100 w-full"
+              className="bg-gray-100 w-full focus:outline-none"
             />
             <svg
               xmlns="http://www.w3.org/2000/svg"
